@@ -9,11 +9,11 @@ export default function Sidebar() {
     <CSidebar visible className="sidebar">
 
         <CSidebarHeader className="border-bottom">
-            <CSidebarBrand className='def-color'>CoreBase Solutions</CSidebarBrand>
+            <CSidebarBrand className='csidebarbrand'>CoreBase Solutions</CSidebarBrand>
         </CSidebarHeader>
 
         <CSidebarNav>
-            <CNavTitle className='def-color'>phAMACore Inventory Management</CNavTitle>
+            <CNavTitle>phAMACore Inventory Management</CNavTitle>
             <CNavItem>
                 <CNavLink href='/' className='def-color'>
                 <CIcon className='add-icon' icon={cilPlus} height={13} width={25}/>
