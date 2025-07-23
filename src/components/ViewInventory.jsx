@@ -9,7 +9,7 @@ export default function ViewInventory() {
         const fetchInventory = async () => {
             try {
                 const response = await getInventory();
-                setInventory(response);
+                setInventory(response.data);
                 console.log('Fetched inventory:', response);
             } catch (error) {
                 console.error('Error fetching inventory:', error);

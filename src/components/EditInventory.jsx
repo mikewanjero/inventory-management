@@ -4,38 +4,48 @@ import { CButton, CFormInput } from '@coreui/react';
 
 export default function EditInventory({id}) {
     const [data, setData] = useState({ name: '', quantity: ''});
+    const [modalIsVisible, setModalIsVisible] = useState(false);
+    const [toast, setToast] = useState(false);
 
     const handleEdit = async () => {
         try {
             await editInventory(id, data);
-            alert('Item updated successfully!');
+            setToast(true);
+            setModalIsVisible(false);
             console.log('Inventory updated successfully!', data);
         } catch (error) {
             console.error('Failed to update inventory!', error);
-            alert('Failed to update inventory. Please try again later.');
+            setToast(true);
+            setModalIsVisible(false);
             setData({ name: '', quantity: ''});
         }
     }
 
   return (
     <>
-        <CFormInput 
-            label='Edit Name' 
-            value={data.name} 
-            onChange={(e) => {
-                setData({ ...data, name: e.target.value});
-            }}
-        />
-        <CFormInput 
-            label='Edit Quantity' 
-            value={data.quantity} 
-            onChange={(e) => {
-                setData({ ...data, quantity: e.target.value});
-            }}
-        />
-        <CButton color='warning' onClick={handleEdit}>
-            Update
-        </CButton>
+        <CButton color="warning" onClick={() => setModalIsVisible(true)}>Edit Item</CButton>
+
+        <CModal visible={modalIsVisible} onClose={() => setModalIsVisible(false)}>
+        <CModalHeader>Edit Inventory Item</CModalHeader>
+
+        <CModalBody>
+            <CFormInput label="Name" value={data.name} onChange={(e) => setData({...data, name: e.target.value})} />
+            <CFormInput label="Quantity" type="number" value={data.quantity} onChange={(e) => setData({...data, quantity: e.target.value})} />
+        </CModalBody>
+
+        <CModalFooter>
+            <CButton color="primary" onClick={handleEdit}>Update</CButton>
+            <CButton color="secondary" onClick={() => setModalIsVisible(false)}>Cancel</CButton>
+        </CModalFooter>
+        </CModal>
+
+        <CToaster placement="top-end">
+        {toast && (
+            <CToast autohide visible>
+            <CToastBody>Item updated successfully!</CToastBody>
+            </CToast>
+        )}
+        </CToaster>
     </>
   )
 }
