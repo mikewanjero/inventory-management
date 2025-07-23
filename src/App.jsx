@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CreateInventory from './components/CreateInventory';
+import ViewInventory from './components/ViewInventory';
+import EditInventory from './components/EditInventory';
+import DeleteInventory from './components/DeleteInventory';
+import { CContainer, CNavbar, CNavItem, CNavLink } from '@coreui/react';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <CNavbar colorScheme="light" className="mb-4">
+        <CNavItem><CNavLink component={Link} to="/">Create</CNavLink></CNavItem>
+        <CNavItem><CNavLink component={Link} to="/view">View</CNavLink></CNavItem>
+        <CNavItem><CNavLink component={Link} to="/edit">Edit</CNavLink></CNavItem>
+        <CNavItem><CNavLink component={Link} to="/delete">Delete</CNavLink></CNavItem>
+      </CNavbar>
+
+      <CContainer>
+        <Routes>
+          <Route path="/" element={<CreateInventory />} />
+          <Route path="/view" element={<ViewInventory />} />
+          <Route path="/edit" element={<EditInventory id={1} />} /> {/* Replace 1 with dynamic ID later */}
+          <Route path="/delete" element={<DeleteInventory id={1} />} />
+        </Routes>
+      </CContainer>
+    </Router>
+  );
 }
 
-export default App
+export default App;
