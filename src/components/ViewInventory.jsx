@@ -1,5 +1,6 @@
 import { CCard, CCardBody, CListGroup, CListGroupItem } from '@coreui/react';
 import React, { useEffect, useState } from 'react'
+import { getInventory } from '../services/apiSetup';
 
 export default function ViewInventory() {
     const [inventory, setInventory] = useState([]);
@@ -7,19 +8,13 @@ export default function ViewInventory() {
     useEffect(() => {
         const fetchInventory = async () => {
             try {
-                const response = await fetch('/api/TestProject/GetTESTInventory');
-                if (!response.ok) {
-                    alert('Failed to fetch inventory!');
-                    throw new Error('Network response was not ok');
-                } else {
-                    const data = await response.json();
-                    setInventory(data);
-                    console.log('Succesfully fetched invenotry: ', data);
-                    return data;
-                }
+                const response = await getInventory();
+                setInventory(response);
+                console.log('Fetched inventory:', response);
             } catch (error) {
-                console.error('Error picking invenotry: ', error);
-                alert('Error fetching invenotry!', error);
+                console.error('Error fetching inventory:', error);
+                setInventory([]);
+                alert('Failed to fetch inventory. Please try again later.');
             }
         };
         fetchInventory();
