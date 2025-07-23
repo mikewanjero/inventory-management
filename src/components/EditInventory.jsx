@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { editInventory } from '../services/apiSetup';
-import { CButton, CFormInput } from '@coreui/react';
+import { CButton, CFormInput, CModal, CModalBody, CModalFooter, CModalHeader, CToast, CToastBody, CToaster } from '@coreui/react';
 
 export default function EditInventory({id}) {
     const [data, setData] = useState({ name: '', quantity: ''});
@@ -29,8 +29,8 @@ export default function EditInventory({id}) {
         <CModalHeader>Edit Inventory Item</CModalHeader>
 
         <CModalBody>
-            <CFormInput label="Name" value={data.name} onChange={(e) => setData({...data, name: e.target.value})} />
-            <CFormInput label="Quantity" type="number" value={data.quantity} onChange={(e) => setData({...data, quantity: e.target.value})} />
+            <CFormInput label="Name: " value={data.name} onChange={(e) => setData({...data, name: e.target.value})} />
+            <CFormInput label="Quantity: " type="number" value={data.quantity} onChange={(e) => setData({...data, quantity: e.target.value})} />
         </CModalBody>
 
         <CModalFooter>
@@ -42,7 +42,7 @@ export default function EditInventory({id}) {
         <CToaster placement="top-end">
         {toast && (
             <CToast autohide visible>
-            <CToastBody>Item updated successfully!</CToastBody>
+                <CToastBody>Item updated successfully!</CToastBody>
             </CToast>
         )}
         </CToaster>
