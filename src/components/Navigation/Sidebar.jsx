@@ -17,25 +17,25 @@ export default function Sidebar() {
             <CNavItem>
                 <CNavLink href='/' className='def-color'>
                 <CIcon className='add-icon' icon={cilPlus} height={13} width={25}/>
-                    Create
+                    Create Item(s)
                 </CNavLink>
             </CNavItem>
             <CNavItem>
                 <CNavLink href="/view" className='def-color'>
                 <CIcon className='view-icon' icon={cilMagnifyingGlass} height={13} width={25}/>
-                    View
+                    View Item(s)
                 </CNavLink>
             </CNavItem>
             <CNavItem>
                 <CNavLink href="/edit" className='def-color'>
                 <CIcon className='edit-icon' icon={cilPencil} height={13} width={25}/>
-                    Edit
+                    Edit Item(s)
                 </CNavLink>
             </CNavItem>
             <CNavItem>
                 <CNavLink href="/delete" className='def-color'>
                 <CIcon className='delete-icon' icon={cilTrash} height={13} width={25}/>
-                    Delete
+                    Delete Item(s)
                 </CNavLink>
             </CNavItem>
         </CSidebarNav>
