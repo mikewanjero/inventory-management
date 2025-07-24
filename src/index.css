@@ -70,6 +70,7 @@ button:focus-visible {
 .app-layout {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
@@ -82,10 +83,20 @@ button:focus-visible {
 
 .header {
   background-color: #e69538;
-  margin-left: 20px;
-  padding: 1rem;
+  width: 100%;
+  margin-left: 0;
+  padding: 1rem 2rem;
   border-bottom: 1px solid #dee2e6;
   border-radius: 15px 15px 0 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
 }
 
 .sidebar {
@@ -93,6 +104,13 @@ button:focus-visible {
   background-color: #f8f9fa;
   border-right: 3px solid #dee2e6;
   padding: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .sidebar .nav-title {
@@ -132,4 +150,52 @@ button:focus-visible {
 
 .def-color {
   color: #e69538;
+}
+
+.create-btn {
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  background-color: #d29249;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-modal .modal-header {
+  background-color: #f0f4f7;
+  margin-top: 100px;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 15px 15px 5px 5px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+}
+
+.create-modal .modal-header .btn-close {
+  color: #000000;
+  opacity: 0.8;
+}
+
+.create-modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.create-modal .modal-input {
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.create-modal .modal-footer {
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+}
+
+.modal-buttons {
+  display: block;
+  color: #e9ecef;
 }
