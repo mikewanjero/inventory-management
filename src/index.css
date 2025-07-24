@@ -209,3 +209,29 @@ button:focus-visible {
   display: flex;
   justify-content: space-between;
 }
+
+.view-inventory-card {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  max-width: 96%;
+  overflow-x: auto;
+}
+
+.ctable th,
+.ctable td {
+  vertical-align: middle;
+}
+
+.inventory-table {
+  width: 100%;
+  table-layout: fixed;
+  background-color: #f8f9fa;
+}
+
+.inventory-table th,
+.inventory-table td {
+  vertical-align: middle;
+  text-align: left;
+  padding: 0.75rem;
+  word-wrap: break-word;
+}
