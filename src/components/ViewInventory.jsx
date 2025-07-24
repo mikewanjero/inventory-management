@@ -1,7 +1,10 @@
 import {
     CCard, CCardBody, CTable, CTableHead, CTableRow,
     CTableHeaderCell, CTableBody, CTableDataCell, CButton,
-    CFormInput, CFormTextarea, CFormCheck
+    CFormInput, CFormTextarea, CFormCheck,
+    CToaster,
+    CToast,
+    CToastBody
 } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import { getInventory, deleteInventory, editInventory } from '../services/apiSetup';
@@ -10,13 +13,25 @@ export default function ViewInventory() {
     const [inventory, setInventory] = useState([]);
     const [editingId, setEditingId] = useState(null);
     const [editData, setEditData] = useState({});
+    const [toastList, setToastList] = useState([]);
+
+    // Trigger toasts
+    const displayToast = (message, color = 'info') => {
+        setToastList((prev) => [
+            ...prev,
+            { message, color, autohide: true, visible: true, timestamp: new Date().toISOString()}
+        ])
+    }
 
     const fetchInventory = async () => {
         try {
             const response = await getInventory();
             setInventory(response.data);
+            displayToast('Inventory fetched successfully!', 'success');
         } catch (error) {
             console.error('Error fetching inventory:', error);
+            displayToast('Failed to fetch inventory. Please try again later.', 'danger');
+            setInventory([]);
         }
     };
 
@@ -38,11 +53,13 @@ export default function ViewInventory() {
     const handleSave = async () => {
         try {
             await editInventory(editingId, editData);
+            displayToast('Item updated successfully!', 'success');
             setEditingId(null);
             setEditData({});
             fetchInventory();
         } catch (error) {
             console.error('Error updating inventory:', error);
+            displayToast('Failed to update item. Please try again.', 'danger');
         }
     };
 
@@ -56,76 +73,83 @@ export default function ViewInventory() {
     };
 
   return (
-    <CCard className="view-inventory-card">
-        <CCardBody>
-            <h4 className="form-header">Inventory List</h4>
-            <CTable bordered responsive hover className="inventory-table">
-                <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell>ID</CTableHeaderCell>
-                        <CTableHeaderCell>Invoice Code</CTableHeaderCell>
-                        <CTableHeaderCell>Description</CTableHeaderCell>
-                        <CTableHeaderCell>Ingredients</CTableHeaderCell>
-                        <CTableHeaderCell>Blocked</CTableHeaderCell>
-                        <CTableHeaderCell>High Value</CTableHeaderCell>
-                        <CTableHeaderCell>Actions</CTableHeaderCell>
-                    </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                    {inventory.map((item) => (
-                    <CTableRow key={item.id}>
-                        <CTableDataCell>{item.id}</CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id
-                                ? <CFormInput value={editData.invCode} onChange={(e) => setEditData({...editData, invCode: e.target.value})} />
-                                : item.invCode}
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id
-                                ? <CFormTextarea rows={2} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
-                                : item.description}
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id
-                                ? <CFormTextarea rows={2} value={editData.ingredients} onChange={(e) => setEditData({...editData, ingredients: e.target.value})} />
-                                : item.ingredients}
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id
-                                ? <CFormCheck checked={editData.blocked} onChange={(e) => setEditData({...editData, blocked: e.target.checked})} />
-                                : item.blocked ? 'Yes' : 'No'}
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id
-                                ? <CFormCheck checked={editData.highValue} onChange={(e) => setEditData({...editData, highValue: e.target.checked})} />
-                                : item.highValue ? 'Yes' : 'No'}
-                        </CTableDataCell>
-                        <CTableDataCell>
-                            {editingId === item.id ? (
-                                <>
-                                <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
-                                    Save
-                                </CButton>
-                                <CButton color="secondary" size="sm" onClick={() => setEditingId(null)}>
-                                    Cancel
-                                </CButton>
-                                </>
-                            ) : (
-                                <>
-                                <CButton color="warning" size="sm" className="me-2" onClick={() => handleEditClick(item)}>
-                                    Edit
-                                </CButton>
-                                <CButton color="danger" size="sm" onClick={() => handleDelete(item.id)}>
-                                    Delete
-                                </CButton>
-                                </>
-                            )}
-                        </CTableDataCell>
-                    </CTableRow>
+        <CCard className="view-inventory-card">
+            <CCardBody>
+                <h4 className="form-header">Inventory List</h4>
+                <CTable bordered responsive hover className="inventory-table">
+                    <CTableHead>
+                        <CTableRow>
+                            <CTableHeaderCell>ID</CTableHeaderCell>
+                            <CTableHeaderCell>Invoice Code</CTableHeaderCell>
+                            <CTableHeaderCell>Description</CTableHeaderCell>
+                            <CTableHeaderCell>Ingredients</CTableHeaderCell>
+                            <CTableHeaderCell>Blocked</CTableHeaderCell>
+                            <CTableHeaderCell>High Value</CTableHeaderCell>
+                            <CTableHeaderCell>Actions</CTableHeaderCell>
+                        </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+                        {inventory.map((item) => (
+                        <CTableRow key={item.id}>
+                            <CTableDataCell>{item.id}</CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id
+                                    ? <CFormInput value={editData.invCode} onChange={(e) => setEditData({...editData, invCode: e.target.value})} />
+                                    : item.invCode}
+                            </CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id
+                                    ? <CFormTextarea rows={2} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
+                                    : item.description}
+                            </CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id
+                                    ? <CFormTextarea rows={2} value={editData.ingredients} onChange={(e) => setEditData({...editData, ingredients: e.target.value})} />
+                                    : item.ingredients}
+                            </CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id
+                                    ? <CFormCheck checked={editData.blocked} onChange={(e) => setEditData({...editData, blocked: e.target.checked})} />
+                                    : item.blocked ? 'Yes' : 'No'}
+                            </CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id
+                                    ? <CFormCheck checked={editData.highValue} onChange={(e) => setEditData({...editData, highValue: e.target.checked})} />
+                                    : item.highValue ? 'Yes' : 'No'}
+                            </CTableDataCell>
+                            <CTableDataCell>
+                                {editingId === item.id ? (
+                                    <>
+                                    <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
+                                        Save
+                                    </CButton>
+                                    <CButton color="secondary" size="sm" onClick={() => setEditingId(null)}>
+                                        Cancel
+                                    </CButton>
+                                    </>
+                                ) : (
+                                    <>
+                                    <CButton color="warning" size="sm" className="me-2" onClick={() => handleEditClick(item)}>
+                                        Edit
+                                    </CButton>
+                                    <CButton color="danger" size="sm" onClick={() => handleDelete(item.id)}>
+                                        Delete
+                                    </CButton>
+                                    </>
+                                )}
+                            </CTableDataCell>
+                        </CTableRow>
+                        ))}
+                    </CTableBody>
+                </CTable>
+                <CToaster placement="top-center">
+                    {toastList.map((toast) => (
+                        <CToast key={toast.timestamp} color={toast.color} autohide visible>
+                            <CToastBody>{toast.message}</CToastBody>
+                        </CToast>
                     ))}
-                </CTableBody>
-            </CTable>
-        </CCardBody>
-    </CCard>
+                </CToaster>
+            </CCardBody>
+        </CCard>
   );
 }
