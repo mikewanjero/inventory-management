@@ -79,6 +79,8 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   background-color: #fff;
+  overflow-y: auto;
+  padding-bottom: 2rem;
 }
 
 .header {
@@ -152,50 +154,58 @@ button:focus-visible {
   color: #e69538;
 }
 
-.create-btn {
+/* Container card styling */
+.create-form-card {
   margin-left: 1.5rem;
-  margin-top: 1rem;
-  background-color: #d29249;
+  margin-top: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 2rem;
+  max-width: 720px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Header style */
+.form-header {
+  background-color: #e69538;
   color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.create-modal .modal-header {
-  background-color: #f0f4f7;
-  margin-top: 100px;
-  border-bottom: 1px solid #dee2e6;
-  border-radius: 15px 15px 5px 5px;
-  padding: 0.5rem 1.5rem;
   font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
 }
 
-.create-modal .modal-header .btn-close {
-  color: #000000;
-  opacity: 0.8;
-}
-
-.create-modal .modal-body {
+/* Form layout */
+.inventory-form {
   display: flex;
   flex-direction: column;
-  background-color: #f8f9fa;
+  justify-content: center;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
-.create-modal .modal-input {
-  padding: 0.75rem;
-  font-size: 0.95rem;
+/* Inputs */
+.form-input,
+.form-textarea {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
-.create-modal .modal-footer {
-  justify-content: flex-end;
-  padding: 1rem 1.5rem;
+/* Checkbox alignment */
+.form-checkboxes {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
 }
 
-.modal-buttons {
-  display: block;
-  color: #e9ecef;
+/* Button styling */
+.form-buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
