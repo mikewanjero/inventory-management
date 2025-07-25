@@ -43,6 +43,17 @@ export default function CreateInventory() {
         }
     };
 
+    const handleCancel = () => {
+        setItem({
+            invCode: '',
+            description: '',
+            ingredients: '',
+            blocked: false,
+            highValue: false,
+        });
+    };
+
+
   return (
     <CCard className="create-form-card">
         <CCardHeader className="form-header">Create Inventory Item</CCardHeader>
@@ -89,10 +100,10 @@ export default function CreateInventory() {
                 </div>
 
                 <div className="form-buttons">
-                    <CButton color="primary" onClick={handleSubmit} style={{backgroundColor: '#ffcb93ff'}}>
+                    <CButton color="primary" onClick={handleSubmit} style={{backgroundColor: '#f98e1bff'}}>
                         Create
                     </CButton>
-                    <CButton color="secondaary" onClick={handleSubmit} style={{backgroundColor: '#ffcb93ff'}}>
+                    <CButton color="secondary" onClick={handleCancel} style={{backgroundColor: '#f98e1bff'}}>
                         Cancel
                     </CButton>
                 </div>
@@ -101,9 +112,9 @@ export default function CreateInventory() {
 
         <CToaster placement="top-end">
             {toast && (
-            <CToast autohide visible>
-                <CToastBody>Item created successfully!</CToastBody>
-            </CToast>
+                <CToast autohide visible>
+                    <CToastBody>Item created successfully!</CToastBody>
+                </CToast>
             )}
         </CToaster>
     </CCard>
