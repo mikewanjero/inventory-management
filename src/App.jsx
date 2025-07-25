@@ -19,8 +19,6 @@ function App() {
             <Routes>
               <Route path="/" element={<CreateInventory />} />
               <Route path="/view" element={<ViewInventory />} />
-              {/* <Route path="/edit" element={<EditInventory id={1} />} /> 
-              <Route path="/delete" element={<DeleteInventory id={1} />} /> */}
             </Routes>
           </CContainer>
         </div>
