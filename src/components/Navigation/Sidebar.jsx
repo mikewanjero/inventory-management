@@ -1,5 +1,5 @@
 import React from 'react'
-import { cilMagnifyingGlass, cilPencil, cilPlus, cilTrash } from '@coreui/icons'
+import { cilMagnifyingGlass, cilPlus } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { CNavItem, CNavLink, CNavTitle, CSidebar, CSidebarBrand, CSidebarHeader, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import { Link } from 'react-router-dom'
@@ -24,18 +24,6 @@ export default function Sidebar() {
                 <CNavLink href="/view" className='def-color'>
                 <CIcon className='view-icon' icon={cilMagnifyingGlass} height={13} width={25}/>
                     View Item(s)
-                </CNavLink>
-            </CNavItem>
-            <CNavItem>
-                <CNavLink href="/edit" className='def-color'>
-                <CIcon className='edit-icon' icon={cilPencil} height={13} width={25}/>
-                    Edit Item(s)
-                </CNavLink>
-            </CNavItem>
-            <CNavItem>
-                <CNavLink href="/delete" className='def-color'>
-                <CIcon className='delete-icon' icon={cilTrash} height={13} width={25}/>
-                    Delete Item(s)
                 </CNavLink>
             </CNavItem>
         </CSidebarNav>
