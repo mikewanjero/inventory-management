@@ -40,10 +40,10 @@ const axiosInstance = axios.create({
         }
     };
 
-    export const editInventory = async (id, data) => {
+    export const editInventory = async (data) => {
         try {
             const response = await axiosInstance.put(
-            `/EditTESTInventory/${id}?connectiondb=${connectionParam}`,
+            `/EditTESTInventory?connectiondb=${connectionParam}`,
             data
             );
             return response.data;
