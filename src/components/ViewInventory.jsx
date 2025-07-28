@@ -21,7 +21,7 @@ export default function ViewInventory() {
             const response = await getInventory();
             setInventory(response);
             if(!componentMount.current) {
-                showToast('Inventory fetched successfully!', 'success');
+                componentMount.current = true;
             }
         } catch (error) {
             console.error('Error fetching inventory:', error);
@@ -92,7 +92,7 @@ export default function ViewInventory() {
                         <CTableRow key={item.invCode}>
                             <CTableDataCell>
                                 {editingId === item.invCode
-                                    ? <CFormInput value={editData.invCode} onChange={(e) => setEditData({...editData, invCode: e.target.value})} />
+                                    ? <CFormInput value={editData.invCode} disabled />
                                     : item.invCode}
                             </CTableDataCell>
                             <CTableDataCell>
