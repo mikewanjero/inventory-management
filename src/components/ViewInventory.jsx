@@ -2,37 +2,30 @@ import {
     CCard, CCardBody, CTable, CTableHead, CTableRow,
     CTableHeaderCell, CTableBody, CTableDataCell, CButton,
     CFormInput, CFormTextarea, CFormCheck,
-    CToaster,
-    CToast,
-    CToastBody
 } from '@coreui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { getInventory, deleteInventory, editInventory } from '../services/apiSetup';
 import CIcon from '@coreui/icons-react';
 import { cilPencil, cilTrash } from '@coreui/icons';
+import { useToast } from '../hooks/ToastContext';
 
 export default function ViewInventory() {
     const [inventory, setInventory] = useState([]);
     const [editingId, setEditingId] = useState(null);
     const [editData, setEditData] = useState({});
-    const [toastList, setToastList] = useState([]);
-
-    // Trigger toasts
-    const displayToast = (message, color = 'info') => {
-        setToastList((prev) => [
-            ...prev,
-            { message, color, autohide: true, visible: true, timestamp: new Date().toISOString()}
-        ])
-    }
+    const { showToast } = useToast();
+    const componentMount = useRef(false);
 
     const fetchInventory = async () => {
         try {
             const response = await getInventory();
             setInventory(response);
-            displayToast('Inventory fetched successfully!', 'success');
+            if(!componentMount.current) {
+                showToast('Inventory fetched successfully!', 'success');
+            }
         } catch (error) {
             console.error('Error fetching inventory:', error);
-            displayToast('Failed to fetch inventory. Please try again later.', 'danger');
+            showToast('Failed to fetch inventory.', 'danger');
             setInventory([]);
         }
     };
@@ -54,23 +47,28 @@ export default function ViewInventory() {
 
     const handleSave = async () => {
         try {
-            await editInventory(editData.invCode, editData);
-            displayToast('Item updated successfully!', 'success');
+            await editInventory(editData);
+            showToast('Item updated successfully!', 'success');
             setEditingId(null);
             setEditData({});
-            fetchInventory();
+            fetchInventory(true);
         } catch (error) {
             console.error('Error updating inventory:', error);
-            displayToast('Failed to update item. Please try again.', 'danger');
+            showToast('Failed to update item. Please try again.', 'danger');
         }
     };
 
     const handleDelete = async (item) => {
         try {
             await deleteInventory(item.invCode);
-            fetchInventory();
+            showToast('Item deleted successfully!', 'success');
+            console.log('Item deleted:', item.invCode);
+            setEditingId(null);
+            setEditData({});
+            fetchInventory(true);
         } catch (error) {
             console.error('Delete failed:', error);
+            showToast('Error deleting item.', 'danger');
         }
     };
 
@@ -123,17 +121,17 @@ export default function ViewInventory() {
                                         <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
                                             Save
                                         </CButton>
-                                        <CButton color="secondary" size="sm" onClick={() => setEditingId(null)}>
+                                        <CButton color="danger" size="sm" onClick={() => setEditingId(null)}>
                                             Cancel
                                         </CButton>
                                     </>
                                 ) : (
                                     <>
                                         <div className='d-flex'>
-                                            <CButton color="warning" size="sm" className="me-2" onClick={() => handleEditClick(item)}>
+                                            <CButton size="sm" className="me-2" onClick={() => handleEditClick(item)}>
                                                 <CIcon icon={cilPencil} style={{ color: 'green', width: '16px', height: '16px' }}/>Edit
                                             </CButton>
-                                            <CButton color="danger" size="sm" onClick={() => handleDelete(item)}>
+                                            <CButton size="sm" onClick={() => handleDelete(item)}>
                                                 <CIcon icon={cilTrash} style={{ color: 'red', width: '16px', height: '16px' }}/>Delete
                                             </CButton>
                                         </div>
@@ -144,13 +142,6 @@ export default function ViewInventory() {
                         ))}
                     </CTableBody>
                 </CTable>
-                <CToaster placement="top-center">
-                    {toastList.map((toast) => (
-                        <CToast key={toast.timestamp} color={toast.color} autohide visible>
-                            <CToastBody>{toast.message}</CToastBody>
-                        </CToast>
-                    ))}
-                </CToaster>
             </CCardBody>
         </CCard>
   );
