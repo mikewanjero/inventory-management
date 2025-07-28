@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
 import { createInventory } from '../services/apiSetup';
 import {
-    CButton,
-    CForm,
-    CFormCheck,
-    CFormInput,
-    CFormLabel,
-    CFormTextarea,
-    CToast,
-    CToastBody,
-    CToaster,
-    CCard,
-    CCardBody,
-    CCardHeader
+    CButton, CForm, CFormCheck, CFormInput, CFormLabel,
+    CFormTextarea, CCard, CCardBody, CCardHeader
 } from '@coreui/react';
+import { useToast } from '../hooks/ToastContext';
 
 export default function CreateInventory() {
     const [item, setItem] = useState({
@@ -23,14 +14,13 @@ export default function CreateInventory() {
         blocked: false,
         highValue: false,
     });
-
-    const [toast, setToast] = useState(false);
-
+    const { showToast } = useToast();
+ 
     const handleSubmit = async () => {
         try {
             const response = await createInventory(item);
             console.log("Inventory created successfully:", response);
-            setToast(true);
+            showToast('Item created successfully!', 'success');
             setItem({
                 invCode: '',
                 description: '',
@@ -40,6 +30,7 @@ export default function CreateInventory() {
             });
         } catch (error) {
             console.error("Failed to create inventory:", error);
+            showToast('Failed to create inventory.', 'danger');
         }
     };
 
@@ -109,14 +100,6 @@ export default function CreateInventory() {
                 </div>
             </CForm>
         </CCardBody>
-
-        <CToaster placement="top-end">
-            {toast && (
-                <CToast autohide visible>
-                    <CToastBody>Item created successfully!</CToastBody>
-                </CToast>
-            )}
-        </CToaster>
     </CCard>
   );
 }
