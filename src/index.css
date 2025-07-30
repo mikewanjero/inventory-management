@@ -88,13 +88,7 @@ button:focus-visible {
 }
 
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e69538;
   width: 100%;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #dee2e6;
   border-radius: 15px 15px 0 0;
 }
 
@@ -102,7 +96,6 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   font-size: 1.4rem;
   font-weight: bold;
   color: #ff9616;
