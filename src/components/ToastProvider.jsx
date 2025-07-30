@@ -1,9 +1,6 @@
-// src/components/ToastContext.jsx
 import React, { useState, useCallback } from 'react';
 import { CToaster, CToast, CToastBody } from '@coreui/react';
 import { ToastContext } from '../hooks/ToastContext';
-
-
 
 export const ToastProvider = ({ children }) => {
 
