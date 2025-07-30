@@ -17,6 +17,11 @@ export default function CreateInventory() {
     const { showToast } = useToast();
  
     const handleSubmit = async () => {
+        if (!item.invCode || !item.description || !item.ingredients) {
+            showToast('Please fill in all the required fields!', 'warning');
+            return;
+        }
+
         try {
             const response = await createInventory(item);
             console.log("Inventory created successfully:", response);
@@ -50,7 +55,9 @@ export default function CreateInventory() {
         <CCardHeader className="form-header">Create Inventory Item</CCardHeader>
         <CCardBody>
             <CForm className="inventory-form">
-                <CFormLabel htmlFor="invCode">Invoice Code</CFormLabel>
+                <CFormLabel htmlFor="invCode">
+                    Invoice Code <span style={{ color: 'red' }}>*</span>
+                </CFormLabel>
                 <CFormInput
                     id="invCode"
                     type="text"
