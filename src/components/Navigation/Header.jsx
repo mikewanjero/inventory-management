@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <CHeader className='header bg-light'>
         <div className="header-content">
-            Inventory Management
+          Inventory Management
         </div>
     </CHeader>
   )
