@@ -240,8 +240,28 @@ button,
 .inventory-table td {
   vertical-align: middle;
   text-align: left;
-  padding: 0.75rem;
+  padding: 0.4rem;
+  font-size: 0.75rem;
   word-wrap: break-word;
+}
+
+.inventory-table .form-control,
+.inventory-table .form-check-input,
+.inventory-table textarea {
+  font-size: 0.75rem;
+  padding: 0.3rem;
+}
+
+.inventory-table .btn {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.view-inventory-card h4.form-header {
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
 }
 
 .toaster-container {
