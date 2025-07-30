@@ -72,7 +72,7 @@ export default function ViewInventory() {
         }
     };
 
-  return (
+    return (
         <CCard className="view-inventory-card">
             <CCardBody>
                 <h4 className="form-header">Inventory List</h4>
@@ -89,60 +89,60 @@ export default function ViewInventory() {
                     </CTableHead>
                     <CTableBody>
                         {Array.isArray(inventory) && inventory.map((item) => (
-                        <CTableRow key={item.invCode}>
-                            <CTableDataCell>
-                                {editingId === item.invCode
-                                    ? <CFormInput value={editData.invCode} disabled />
-                                    : item.invCode}
-                            </CTableDataCell>
-                            <CTableDataCell>
-                                {editingId === item.invCode
-                                    ? <CFormTextarea rows={2} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
-                                    : item.description}
-                            </CTableDataCell>
-                            <CTableDataCell>
-                                {editingId === item.invCode
-                                    ? <CFormTextarea rows={2} value={editData.ingredients} onChange={(e) => setEditData({...editData, ingredients: e.target.value})} />
-                                    : item.ingredients}
-                            </CTableDataCell>
-                            <CTableDataCell>
-                                {editingId === item.invCode
-                                    ? <CFormCheck checked={editData.blocked} onChange={(e) => setEditData({...editData, blocked: e.target.checked})} />
-                                    : item.blocked ? 'Yes' : 'No'}
-                            </CTableDataCell>
-                            <CTableDataCell>
-                                {editingId === item.invCode
-                                    ? <CFormCheck checked={editData.highValue} onChange={(e) => setEditData({...editData, highValue: e.target.checked})} />
-                                    : item.highValue ? 'Yes' : 'No'}
-                            </CTableDataCell>
-                            <CTableDataCell>
-                                {editingId === item.invCode ? (
-                                    <>
-                                        <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
-                                            Save
-                                        </CButton>
-                                        <CButton color="danger" size="sm" onClick={() => setEditingId(null)}>
-                                            Cancel
-                                        </CButton>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className='d-flex'>
-                                            <CButton size="sm" className="me-2" onClick={() => handleEditClick(item)}>
-                                                <CIcon icon={cilPencil} style={{ color: 'green', width: '16px', height: '16px' }}/>Edit
+                            <CTableRow key={item.invCode}>
+                                <CTableDataCell>
+                                    {editingId === item.invCode
+                                        ? <CFormInput value={editData.invCode} disabled />
+                                        : item.invCode}
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                    {editingId === item.invCode
+                                        ? <CFormTextarea rows={2} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
+                                        : item.description}
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                    {editingId === item.invCode
+                                        ? <CFormTextarea rows={2} value={editData.ingredients} onChange={(e) => setEditData({...editData, ingredients: e.target.value})} />
+                                        : item.ingredients}
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                    {editingId === item.invCode
+                                        ? <CFormCheck checked={editData.blocked} onChange={(e) => setEditData({...editData, blocked: e.target.checked})} />
+                                        : item.blocked ? 'Yes' : 'No'}
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                    {editingId === item.invCode
+                                        ? <CFormCheck checked={editData.highValue} onChange={(e) => setEditData({...editData, highValue: e.target.checked})} />
+                                        : item.highValue ? 'Yes' : 'No'}
+                                </CTableDataCell>
+                                <CTableDataCell>
+                                    {editingId === item.invCode ? (
+                                        <>
+                                            <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
+                                                Save
                                             </CButton>
-                                            <CButton size="sm" onClick={() => handleDelete(item)}>
-                                                <CIcon icon={cilTrash} style={{ color: 'red', width: '16px', height: '16px' }}/>Delete
+                                            <CButton color="danger" size="sm" onClick={() => setEditingId(null)}>
+                                                Cancel
                                             </CButton>
-                                        </div>
-                                    </>
-                                )}
-                            </CTableDataCell>
-                        </CTableRow>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className='d-flex'>
+                                                <CButton size="sm" className="me-2" onClick={() => handleEditClick(item)}>
+                                                    <CIcon icon={cilPencil} style={{ color: 'green', width: '16px', height: '16px' }}/>Edit
+                                                </CButton>
+                                                <CButton size="sm" onClick={() => handleDelete(item)}>
+                                                    <CIcon icon={cilTrash} style={{ color: 'red', width: '16px', height: '16px' }}/>Delete
+                                                </CButton>
+                                            </div>
+                                        </>
+                                    )}
+                                </CTableDataCell>
+                            </CTableRow>
                         ))}
                     </CTableBody>
                 </CTable>
             </CCardBody>
         </CCard>
-  );
+    );
 }
