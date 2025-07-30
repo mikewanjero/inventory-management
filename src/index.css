@@ -88,17 +88,20 @@ button:focus-visible {
 }
 
 .header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   width: 100%;
+  background-color: #f3f4f7 !important;
   border-radius: 15px 15px 0 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .header-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 1.4rem;
   font-weight: bold;
   color: #ff9616;
+  text-align: center;
 }
 
 .sidebar {
