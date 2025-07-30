@@ -30,6 +30,10 @@ body {
   min-height: 100vh;
 }
 
+body, .form-label, .form-control, .btn, .card, .table {
+  font-family: 'Poppins', sans-serif !important;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
