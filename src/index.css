@@ -123,7 +123,7 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   font-weight: 600;
-  color: #e17e0d;
+  color: #e17e0d !important;
 }
 
 .sidebar .nav-item {
@@ -149,7 +149,7 @@ button:focus-visible {
 
 .csidebarbrand {
   font-weight: bold;
-  color: #d57200;
+  color: #d57200 !important;
 }
 
 .def-color {
@@ -234,6 +234,10 @@ button,
   width: 100%;
   table-layout: fixed;
   background-color: #f8f9fa;
+}
+
+.inventory-table th tr{
+  font-weight: bold;
 }
 
 .inventory-table th,
