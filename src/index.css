@@ -266,8 +266,7 @@ button,
 
 .view-inventory-card h4.form-header {
   font-size: 1rem;
-  padding: 0.5rem 0;
-  margin-bottom: 1rem;
+  padding: 0.5rem 0.5;
 }
 
 .toaster-container {
