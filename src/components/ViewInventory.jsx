@@ -33,12 +33,21 @@ export default function ViewInventory() {
     };
 
     useEffect(() => {
-        fetchInventory();
+        fetchInventory(); // Fetch inventory on component mount
     }, []);
+
+    useEffect(() => {
+        setFilter(inventory); // Reset filtered list when inventory changes
+    }, [inventory]);
 
     const handleSearch = (e) => {
         const value = e.target.value.toLowerCase();
         setSearchTerm(value);
+
+        if (value.trim() === '') {
+            setFilter(inventory); // Reset filter if search term is empty
+            return;
+        }
         if (value) {
             const filtered = inventory.filter(item =>
                 item.invCode.toLowerCase().includes(value) ||
