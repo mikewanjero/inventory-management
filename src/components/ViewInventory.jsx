@@ -74,7 +74,7 @@ export default function ViewInventory() {
 
     return (
         <CCard className="view-inventory-card">
-            <CCardBody>
+            <CCardBody style={{ overflowY: 'auto', maxHeight: '300px' }}>
                 <h4 className="form-header">Inventory List</h4>
                 <CTable bordered responsive hover className="inventory-table">
                     <CTableHead>
@@ -118,21 +118,21 @@ export default function ViewInventory() {
                                 <CTableDataCell>
                                     {editingId === item.invCode ? (
                                         <>
-                                            <CButton color="success" size="sm" className="me-2" onClick={handleSave}>
+                                            <CButton color="success" size="sm" className="me-2 mb-1" onClick={handleSave}>
                                                 Save
                                             </CButton>
-                                            <CButton color="danger" size="sm" onClick={() => setEditingId(null)}>
+                                            <CButton color="danger" size="sm" className='mb-1' onClick={() => setEditingId(null)}>
                                                 Cancel
                                             </CButton>
                                         </>
                                     ) : (
                                         <>
-                                            <div className='d-flex'>
-                                                <CButton size="sm" className="me-2" onClick={() => handleEditClick(item)}>
-                                                    <CIcon icon={cilPencil} style={{ color: 'green', width: '16px', height: '16px' }}/>Edit
+                                            <div className='d-flex gap-0'>
+                                                <CButton size="sm" className="me-2 d-inline-flex align-items-center" style={{ whiteSpace: 'nowrap'}} onClick={() => handleEditClick(item)}>
+                                                    <CIcon icon={cilPencil} style={{ color: 'green', width: '16px', height: '16px' }}/><span className='ms-1'>Edit</span>
                                                 </CButton>
-                                                <CButton size="sm" onClick={() => handleDelete(item)}>
-                                                    <CIcon icon={cilTrash} style={{ color: 'red', width: '16px', height: '16px' }}/>Delete
+                                                <CButton size="sm" className='d-inline-flex align-items-center' style={{ whiteSpace: 'nowrap'}} onClick={() => handleDelete(item)}>
+                                                    <CIcon icon={cilTrash} style={{ color: 'red', width: '16px', height: '16px' }}/><span className='ms-1'>Delete</span>
                                                 </CButton>
                                             </div>
                                         </>

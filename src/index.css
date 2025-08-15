@@ -168,8 +168,8 @@ button:focus-visible {
 
 /* Header style */
 .form-header {
-  background-color: #e69538;
-  color: #fff;
+  background-color: #fafafa;
+  color: #e69538;
   font-weight: 500;
   font-size: 1rem;
   padding: 0.5rem;
@@ -232,12 +232,14 @@ button,
 
 .inventory-table {
   width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
   background-color: #f8f9fa;
 }
 
-.inventory-table th tr{
-  font-weight: bold;
+.inventory-table thead th {
+  text-align: center;
+  background-color: #e9ecef;
+  color: #495057;
 }
 
 .inventory-table th,
